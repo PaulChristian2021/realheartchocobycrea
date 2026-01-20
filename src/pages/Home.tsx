@@ -32,8 +32,9 @@ export default function Home() {
             Give her something she’ll remember — not just chocolate.
           </Typography>
           <Typography variant="h6" mb={4}>
-            Valentine’s gifts are hard when you care. We help you give a
-            thoughtful experience that shows effort — without overthinking it.
+            Valentine’s gifts are hard when you care. <br />
+            We help you give a thoughtful experience that shows effort — without
+            overthinking it.
           </Typography>
           <Button
             variant="contained"
@@ -49,13 +50,13 @@ export default function Home() {
         {/* BODY COPY + BACKSTORY */}
         <Box textAlign="center" mb={8}>
           <Typography variant="body1" sx={{ fontSize: "1.2rem" }}>
-            You want her to feel special, not disappointed. We’ve been there —
-            wanting a gift that says everything you feel.
+            You want her to feel special, not disappointed. <br />
+            We’ve been there — wanting a gift that says everything you feel.
           </Typography>
           <Typography variant="body1" sx={{ fontSize: "1.2rem", mt: 2 }}>
-            That’s why we created a layered Valentine’s experience: hidden
-            messages, personal cards, and small details meant to be noticed,
-            shared, and remembered.
+            That’s why we created a layered Valentine’s experience: <br />
+            hidden messages, personal cards, and small details meant to be
+            noticed, shared, and remembered.
           </Typography>
         </Box>
 
