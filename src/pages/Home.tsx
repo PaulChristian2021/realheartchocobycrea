@@ -22,44 +22,50 @@ export default function Home() {
     >
       <Container maxWidth="md">
         {/* HERO SECTION */}
-        <Box textAlign="center" mb={8}>
-          <Typography
-            variant="h3"
-            component="h1"
-            fontWeight="bold"
-            gutterBottom
-          >
-            Give her something she’ll remember — not just chocolate.
-          </Typography>
-          <Typography variant="h6" mb={4}>
-            Valentine’s gifts are hard when you care. <br />
-            We help you give a thoughtful experience that shows effort — without
-            overthinking it.
-          </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            sx={{ px: 5, py: 1.5 }}
-            href="#shop"
-          >
-            Create Her Valentine Experience
-          </Button>
-        </Box>
+        <Box
+          id={"changingImages"}
+          sx={{
+            backgroundColor: "#333",
+          }}
+        >
+          <Box textAlign="center" mb={8}>
+            <Typography
+              variant="h3"
+              component="h1"
+              fontWeight="bold"
+              gutterBottom
+            >
+              Give her something she’ll remember — not just chocolate.
+            </Typography>
+            <Typography variant="h6" mb={4}>
+              Valentine’s gifts are hard when you care. <br />
+              We help you give a thoughtful experience that shows effort —
+              without overthinking it.
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              sx={{ px: 5, py: 1.5 }}
+              href="#shop"
+            >
+              Create Her Valentine Experience
+            </Button>
+          </Box>
 
-        {/* BODY COPY + BACKSTORY */}
-        <Box textAlign="center" mb={8}>
-          <Typography variant="body1" sx={{ fontSize: "1.2rem" }}>
-            You want her to feel special, not disappointed. <br />
-            We’ve been there — wanting a gift that says everything you feel.
-          </Typography>
-          <Typography variant="body1" sx={{ fontSize: "1.2rem", mt: 2 }}>
-            That’s why we created a layered Valentine’s experience: <br />
-            hidden messages, personal cards, and small details meant to be
-            noticed, shared, and remembered.
-          </Typography>
+          {/* BODY COPY + BACKSTORY */}
+          <Box textAlign="center" mb={8}>
+            <Typography variant="body1" sx={{ fontSize: "1.2rem" }}>
+              You want her to feel special, not disappointed. <br />
+              We’ve been there — wanting a gift that says everything you feel.
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: "1.2rem", mt: 2 }}>
+              That’s why we created a layered Valentine’s experience: <br />
+              hidden messages, personal cards, and small details meant to be
+              noticed, shared, and remembered.
+            </Typography>
+          </Box>
         </Box>
-
         {/* HOW IT WORKS */}
         <Box textAlign="center" mb={8}>
           <Typography variant="h5" fontWeight="medium" gutterBottom>
