@@ -30,6 +30,26 @@ export default function Home() {
   // previous image index (used for fading)
   const [prevIndex, setPrevIndex] = useState(0);
 
+  // pre-load
+  useEffect(() => {
+    heroImages.forEach((src) => {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.href = `/homeBgImages/${src}`;
+      document.head.appendChild(link);
+    });
+
+    return () => {
+      heroImages.forEach((src) => {
+        const href = `/homeBgImages/${src}`;
+        document
+          .querySelectorAll(`link[rel="preload"][href="${href}"]`)
+          .forEach((el) => el.remove());
+      });
+    };
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setPrevIndex(index); // store current before changing
