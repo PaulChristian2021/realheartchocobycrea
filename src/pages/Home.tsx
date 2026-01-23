@@ -132,7 +132,7 @@ export default function Home() {
             inset: 0,
             bgcolor: "black",
             opacity: isFading ? 1 : 0,
-            transition: "opacity 0.4s ease",
+            transition: "opacity 1s ease",
             zIndex: 1,
             pointerEvents: "none",
           }}
