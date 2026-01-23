@@ -50,11 +50,24 @@ export default function Home() {
     };
   }, []);
 
+  // images transition
+  const [isFading, setIsFading] = useState(false);
   useEffect(() => {
     const interval = setInterval(() => {
-      setPrevIndex(index); // store current before changing
-      setIndex((prev) => (prev + 1) % heroImages.length);
-    }, 6000); // change every 6 seconds
+      // start blackout
+      setIsFading(true);
+
+      // swap image halfway through fade
+      setTimeout(() => {
+        setPrevIndex(index);
+        setIndex((prev) => (prev + 1) % heroImages.length);
+      }, 200);
+
+      // fade back in
+      setTimeout(() => {
+        setIsFading(false);
+      }, 400);
+    }, 6000);
 
     return () => clearInterval(interval);
   }, [index]);
@@ -110,6 +123,18 @@ export default function Home() {
             backgroundPosition: "center",
             opacity: 1,
             transition: "opacity 1.2s ease-in-out",
+          }}
+        />
+        {/* BLACK FADE OVERLAY */}
+        <Box
+          sx={{
+            position: "absolute",
+            inset: 0,
+            bgcolor: "black",
+            opacity: isFading ? 1 : 0,
+            transition: "opacity 0.4s ease",
+            zIndex: 1,
+            pointerEvents: "none",
           }}
         />
 
