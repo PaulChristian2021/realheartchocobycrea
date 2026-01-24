@@ -161,7 +161,7 @@ export default function Home() {
               variant="contained"
               size="large"
               sx={{ px: 5, py: 1.5 }}
-              href="#shop"
+              href="/shop"
             >
               Create Her Valentine Experience
             </Button>
@@ -221,7 +221,7 @@ export default function Home() {
             variant="contained"
             size="large"
             sx={{ px: 5, py: 1.5 }}
-            href="#shop"
+            href="/shop"
           >
             Give her the right gift
           </Button>
@@ -231,6 +231,7 @@ export default function Home() {
             color="grey.500"
             mt={2}
             fontStyle="italic"
+            paddingBottom={10}
           >
             Because sometimes you feel a lot — and don’t know how to say it.
           </Typography>

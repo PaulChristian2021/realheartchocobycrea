@@ -5,6 +5,7 @@ import darkTheme from "./theme";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import DailyQuotes from "./pages/DailyQuotes";
+import ProductPage from "./pages/ProductPage";
 
 export default function App() {
   return (
@@ -25,6 +26,8 @@ export default function App() {
 
           {/* fallback for unknown paths */}
           <Route path="*" element={<Navigate to="/home" replace />} />
+
+          <Route path="/products" element={<ProductPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
