@@ -190,7 +190,7 @@ export default function CheckoutPage() {
             variant="body2"
             sx={{ opacity: 0.7, fontStyle: "italic" }}
           >
-            Join hundreds of happy Valentines who chose to make the moment
+            Moments like these don’t happen every day—thank you for making it
             special.
           </Typography>
         </Box>
