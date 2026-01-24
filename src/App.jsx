@@ -27,7 +27,7 @@ export default function App() {
           {/* fallback for unknown paths */}
           <Route path="*" element={<Navigate to="/home" replace />} />
 
-          <Route path="/products" element={<ProductPage />} />
+          <Route path="/tiers" element={<ProductPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

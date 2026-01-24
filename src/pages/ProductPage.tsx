@@ -10,8 +10,8 @@ import {
   CardMedia,
 } from "@mui/material";
 
-// Chocolate products
-const products = [
+// Chocolate tiers
+const tiers = [
   {
     id: "thoughtful",
     name: "Thoughtful",
@@ -63,7 +63,7 @@ export default function ProductPage() {
             justifyContent: "center",
           }}
         >
-          {products.map((product) => (
+          {tiers.map((product) => (
             <Card
               key={product.id}
               sx={{

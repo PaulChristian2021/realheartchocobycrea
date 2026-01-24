@@ -121,11 +121,11 @@ export default function Header() {
             </Button>
             <Button
               component={Link}
-              to="/shop"
+              to="/tiers"
               color="inherit"
               sx={{ "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" } }}
             >
-              Shop
+              Tiers
             </Button>
             <Button
               component={Link}

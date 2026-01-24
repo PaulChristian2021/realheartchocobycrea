@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Box,
   Container,
@@ -157,14 +158,11 @@ export default function Home() {
               We help you give a thoughtful experience without overthinking it.
             </Typography>
 
-            <Button
-              variant="contained"
-              size="large"
-              sx={{ px: 5, py: 1.5 }}
-              href="/shop"
-            >
-              Create Her Valentine Experience
-            </Button>
+            <Link to="/tiers">
+              <Button variant="contained" size="large" sx={{ px: 5, py: 1.5 }}>
+                Create Her Valentine Experience
+              </Button>
+            </Link>
           </Box>
 
           {/* BODY COPY + BACKSTORY */}
@@ -217,14 +215,11 @@ export default function Home() {
             Smiles — because it feels personal.
           </Typography>
 
-          <Button
-            variant="contained"
-            size="large"
-            sx={{ px: 5, py: 1.5 }}
-            href="/shop"
-          >
-            Give her the right gift
-          </Button>
+          <Link to="/tiers">
+            <Button variant="contained" size="large" sx={{ px: 5, py: 1.5 }}>
+              Give her the right gift
+            </Button>
+          </Link>
 
           <Typography
             variant="body2"
