@@ -10,6 +10,7 @@ import {
 import { Add, Remove, Delete } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import FreeShippingInfo from "../components/FreeShippingInfo";
 
 export default function CartPage() {
   const { items, updateQuantity, removeItem, total } = useCart();
@@ -97,7 +98,7 @@ export default function CartPage() {
             </Typography>
 
             <Typography variant="body2" color="text.secondary" mt={1}>
-              Free shipping • Secure checkout
+              <FreeShippingInfo /> • Secure checkout
             </Typography>
 
             <Button

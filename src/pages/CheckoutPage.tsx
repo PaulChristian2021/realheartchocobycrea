@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { Add, Remove, Delete } from "@mui/icons-material";
 import { useCart } from "../context/CartContext";
+import FreeShippingInfo from "../components/FreeShippingInfo";
 
 export default function CheckoutPage() {
   const { items, total, updateQuantity, removeItem } = useCart();
@@ -168,7 +169,7 @@ export default function CheckoutPage() {
             <Typography fontWeight="bold">₱{total}</Typography>
           </Box>
           <Typography variant="body2" sx={{ opacity: 0.6, mt: 1 }}>
-            Free shipping included
+            <FreeShippingInfo /> included
           </Typography>
         </Paper>
 

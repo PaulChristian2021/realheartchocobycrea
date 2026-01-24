@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { useCart } from "../context/CartContext";
 import { Add, Remove } from "@mui/icons-material";
+import FreeShippingInfo from "../components/FreeShippingInfo";
 
 const tiers = [
   {
@@ -123,7 +124,7 @@ export default function ProductPage() {
                 </Typography>
 
                 <Typography variant="subtitle2" color="text.secondary" mb={3}>
-                  Free shipping nationwide
+                  <FreeShippingInfo /> nationwide
                 </Typography>
 
                 {/* Quantity Selector */}
