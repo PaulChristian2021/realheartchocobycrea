@@ -1,4 +1,3 @@
-// src/pages/CheckoutPage.tsx
 import React from "react";
 import {
   Box,
@@ -6,81 +5,121 @@ import {
   Typography,
   Button,
   Divider,
-  Stack,
+  Paper,
 } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 export default function CheckoutPage() {
+  const location = useLocation();
+
+  // Expect product info passed via navigation state
+  const product = location.state?.product || {
+    name: "Thoughtful",
+    price: 549,
+  };
+
   return (
     <Box
       sx={{
         minHeight: "100vh",
-        bgcolor: "background.default",
-        color: "text.primary",
-        py: 10,
+        bgcolor: "#0e0e0e",
+        color: "#fff",
+        py: 8,
       }}
     >
       <Container maxWidth="sm">
         {/* HEADER */}
-        <Box textAlign="center" mb={6}>
+        <Box textAlign="center" mb={5}>
           <Typography variant="h4" fontWeight="bold" gutterBottom>
-            You’re almost there
+            Almost There
           </Typography>
-          <Typography variant="body1" sx={{ opacity: 0.85 }}>
-            You’ve chosen something thoughtful — now let’s make it official.
+          <Typography sx={{ opacity: 0.8 }}>
+            You’re about to give something that feels thoughtful — and that
+            matters.
           </Typography>
         </Box>
 
         {/* ORDER SUMMARY */}
-        <Box
+        <Paper
+          elevation={0}
           sx={{
-            bgcolor: "rgba(255,255,255,0.05)",
-            borderRadius: 2,
+            bgcolor: "#1a1a1a",
+            borderRadius: 3,
             p: 4,
-            mb: 5,
+            mb: 4,
           }}
         >
-          <Stack spacing={2}>
-            <Typography variant="h6" fontWeight="medium">
-              Your Selection
-            </Typography>
+          <Typography variant="h6" fontWeight="bold" gutterBottom>
+            Order Summary
+          </Typography>
 
-            <Typography variant="body1">Deluxe Chocolate Tier</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              mb: 1.5,
+            }}
+          >
+            <Typography>{product.name} Tier</Typography>
+            <Typography>₱{product.price}</Typography>
+          </Box>
 
-            <Divider sx={{ borderColor: "rgba(255,255,255,0.15)" }} />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              mb: 1.5,
+            }}
+          >
+            <Typography sx={{ opacity: 0.8 }}>Shipping</Typography>
+            <Typography sx={{ opacity: 0.8 }}>Free</Typography>
+          </Box>
 
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Typography variant="body1">Total</Typography>
-              <Typography variant="h6" fontWeight="bold">
-                ₱599
-              </Typography>
-            </Stack>
-          </Stack>
-        </Box>
+          <Divider sx={{ my: 2, borderColor: "rgba(255,255,255,0.1)" }} />
 
-        {/* PRIMARY CTA */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Typography fontWeight="bold">Total</Typography>
+            <Typography fontWeight="bold">₱{product.price}</Typography>
+          </Box>
+
+          <Typography variant="body2" sx={{ opacity: 0.6, mt: 1 }}>
+            Free shipping included
+          </Typography>
+        </Paper>
+
+        {/* CTA */}
         <Button
           variant="contained"
-          size="large"
           fullWidth
-          sx={{ py: 1.6, mb: 3 }}
-          href="#payment" // replace later with real payment flow
+          size="large"
+          sx={{
+            py: 1.6,
+            fontSize: "1rem",
+            borderRadius: 2,
+            mb: 3,
+          }}
         >
           Proceed to Payment
         </Button>
 
-        {/* REASSURANCE */}
-        <Typography
-          variant="body2"
-          align="center"
-          sx={{ opacity: 0.7, fontStyle: "italic" }}
-        >
-          Join hundreds of happy Valentines who chose to make the moment
-          special.
-        </Typography>
+        {/* PSYCHOLOGICAL REINFORCEMENT */}
+        <Box textAlign="center">
+          <Typography
+            variant="body2"
+            sx={{ opacity: 0.7, fontStyle: "italic" }}
+          >
+            Join hundreds of happy Valentines who chose to make the moment
+            special.
+          </Typography>
+        </Box>
       </Container>
     </Box>
   );

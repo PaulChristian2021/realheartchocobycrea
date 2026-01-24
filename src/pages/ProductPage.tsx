@@ -9,6 +9,7 @@ import {
   CardContent,
   CardMedia,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 // Chocolate tiers
 const tiers = [
@@ -99,14 +100,11 @@ export default function ProductPage() {
                 <Typography variant="subtitle2" color="text.secondary" mb={2}>
                   Free shipping nationwide
                 </Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                  href="#checkout"
-                >
-                  Buy Now
-                </Button>
+                <Link to="/checkout">
+                  <Button variant="contained" color="primary" fullWidth>
+                    Buy Now
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           ))}
