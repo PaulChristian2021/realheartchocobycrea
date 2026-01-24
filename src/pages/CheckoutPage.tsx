@@ -1,4 +1,5 @@
-import React from "react";
+// src/pages/CheckoutPage.tsx
+import React, { useState } from "react";
 import {
   Box,
   Container,
@@ -6,16 +7,25 @@ import {
   Button,
   Divider,
   Paper,
+  TextField,
+  IconButton,
 } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { Add, Remove, Delete } from "@mui/icons-material";
+import { useCart } from "../context/CartContext";
 
 export default function CheckoutPage() {
-  const location = useLocation();
+  const { items, total, updateQuantity, removeItem } = useCart();
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
-  // Expect product info passed via navigation state
-  const product = location.state?.product || {
-    name: "Thoughtful",
-    price: 549,
+  const handlePayment = () => {
+    if (!email || !phone) {
+      alert("Please enter your email and phone number.");
+      return;
+    }
+    alert(
+      `Order confirmed!\nEmail: ${email}\nPhone: ${phone}\nTotal: ₱${total}`
+    );
   };
 
   return (
@@ -31,51 +41,119 @@ export default function CheckoutPage() {
         {/* HEADER */}
         <Box textAlign="center" mb={5}>
           <Typography variant="h4" fontWeight="bold" gutterBottom>
-            Almost There
+            Checkout
           </Typography>
           <Typography sx={{ opacity: 0.8 }}>
-            You’re about to give something that feels thoughtful — and that
-            matters.
+            Enter your details and confirm your order
           </Typography>
         </Box>
+
+        {/* CUSTOMER INFO */}
+        <Paper
+          elevation={0}
+          sx={{ bgcolor: "#1a1a1a", borderRadius: 3, p: 4, mb: 4 }}
+        >
+          <Typography variant="h6" fontWeight="bold" gutterBottom>
+            Customer Info
+          </Typography>
+          <TextField
+            label="Email"
+            variant="filled"
+            fullWidth
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Phone Number"
+            variant="filled"
+            fullWidth
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </Paper>
 
         {/* ORDER SUMMARY */}
         <Paper
           elevation={0}
-          sx={{
-            bgcolor: "#1a1a1a",
-            borderRadius: 3,
-            p: 4,
-            mb: 4,
-          }}
+          sx={{ bgcolor: "#1a1a1a", borderRadius: 3, p: 4, mb: 4 }}
         >
           <Typography variant="h6" fontWeight="bold" gutterBottom>
             Order Summary
           </Typography>
 
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mb: 1.5,
-            }}
-          >
-            <Typography>{product.name} Tier</Typography>
-            <Typography>₱{product.price}</Typography>
-          </Box>
+          {items.length === 0 ? (
+            <Typography>Your cart is empty.</Typography>
+          ) : (
+            items.map((item) => (
+              <Box
+                key={item.id}
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center", // vertical alignment
+                  mb: 2,
+                  flexWrap: "wrap", // ensures responsiveness on mobile
+                }}
+              >
+                {/* Item Name & Price per unit */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    minWidth: 120,
+                  }}
+                >
+                  <Typography>{item.name}</Typography>
+                  <Typography sx={{ opacity: 0.8, fontSize: "0.875rem" }}>
+                    ₱{item.price} each
+                  </Typography>
+                </Box>
 
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mb: 1.5,
-            }}
-          >
-            <Typography sx={{ opacity: 0.8 }}>Shipping</Typography>
-            <Typography sx={{ opacity: 0.8 }}>Free</Typography>
-          </Box>
+                {/* Quantity Controls */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                  }}
+                >
+                  <IconButton
+                    size="small"
+                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                  >
+                    <Remove fontSize="small" />
+                  </IconButton>
+
+                  <Typography sx={{ width: 24, textAlign: "center" }}>
+                    {item.quantity}
+                  </Typography>
+
+                  <IconButton
+                    size="small"
+                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                  >
+                    <Add fontSize="small" />
+                  </IconButton>
+
+                  <IconButton
+                    size="small"
+                    onClick={() => removeItem(item.id)}
+                    color="error"
+                  >
+                    <Delete fontSize="small" />
+                  </IconButton>
+                </Box>
+
+                {/* Total price for this item */}
+                <Typography
+                  sx={{ minWidth: 60, textAlign: "right", fontWeight: 500 }}
+                >
+                  ₱{item.price * item.quantity}
+                </Typography>
+              </Box>
+            ))
+          )}
 
           <Divider sx={{ my: 2, borderColor: "rgba(255,255,255,0.1)" }} />
 
@@ -87,9 +165,8 @@ export default function CheckoutPage() {
             }}
           >
             <Typography fontWeight="bold">Total</Typography>
-            <Typography fontWeight="bold">₱{product.price}</Typography>
+            <Typography fontWeight="bold">₱{total}</Typography>
           </Box>
-
           <Typography variant="body2" sx={{ opacity: 0.6, mt: 1 }}>
             Free shipping included
           </Typography>
@@ -100,12 +177,9 @@ export default function CheckoutPage() {
           variant="contained"
           fullWidth
           size="large"
-          sx={{
-            py: 1.6,
-            fontSize: "1rem",
-            borderRadius: 2,
-            mb: 3,
-          }}
+          sx={{ py: 1.6, fontSize: "1rem", borderRadius: 2, mb: 3 }}
+          onClick={handlePayment}
+          disabled={items.length === 0}
         >
           Proceed to Payment
         </Button>

@@ -1,5 +1,5 @@
 // src/pages/ProductPage.tsx
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Container,
@@ -8,17 +8,19 @@ import {
   Card,
   CardContent,
   CardMedia,
+  IconButton,
+  TextField,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import { Add, Remove } from "@mui/icons-material";
 
-// Chocolate tiers
 const tiers = [
   {
     id: "thoughtful",
     name: "Thoughtful",
     description:
       "A carefully crafted chocolate tier designed to delight and create a memorable experience.",
-    price: "₱549",
+    price: 549,
     image: "/tiers/p_thoughtful.png",
   },
   {
@@ -26,12 +28,36 @@ const tiers = [
     name: "Deluxe",
     description:
       "An elevated chocolate tier for a richer, more indulgent experience that feels truly special.",
-    price: "₱649",
+    price: 649,
     image: "/tiers/p_deluxe.jpg",
   },
 ];
 
 export default function ProductPage() {
+  const { addItem } = useCart();
+
+  // Track quantity per product
+  const [quantities, setQuantities] = useState(
+    tiers.reduce((acc, tier) => ({ ...acc, [tier.id]: 1 }), {})
+  );
+
+  const handleQuantityChange = (id: string, delta: number) => {
+    setQuantities((prev) => {
+      const newQty = prev[id] + delta;
+      return { ...prev, [id]: newQty > 0 ? newQty : 1 };
+    });
+  };
+
+  const handleAddToCart = (product: (typeof tiers)[number]) => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: quantities[product.id],
+    });
+    alert(`${quantities[product.id]} x ${product.name} added to cart!`);
+  };
+
   return (
     <Box
       sx={{
@@ -40,11 +66,10 @@ export default function ProductPage() {
         bgcolor: "background.default",
         color: "text.primary",
         py: 8,
-        paddingBottom: 10,
+        pb: 10,
       }}
     >
       <Container maxWidth="lg">
-        {/* PAGE HEADER */}
         <Box textAlign="center" mb={6}>
           <Typography variant="h3" fontWeight="bold" gutterBottom>
             Choose Your Chocolate Tier
@@ -55,7 +80,6 @@ export default function ProductPage() {
           </Typography>
         </Box>
 
-        {/* PRODUCT LIST */}
         <Box
           sx={{
             display: "flex",
@@ -78,7 +102,6 @@ export default function ProductPage() {
                 },
               }}
             >
-              {/* Product Image */}
               <CardMedia
                 component="img"
                 height="220"
@@ -86,34 +109,75 @@ export default function ProductPage() {
                 alt={product.name}
               />
 
-              {/* Product Content */}
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography variant="h6" fontWeight="bold" gutterBottom>
                   {product.name}
                 </Typography>
+
                 <Typography variant="body2" color="text.secondary" mb={2}>
                   {product.description}
                 </Typography>
-                <Typography variant="subtitle1" fontWeight="medium" mb={2}>
-                  {product.price}
+
+                <Typography variant="subtitle1" fontWeight="medium" mb={1}>
+                  ₱{product.price}
                 </Typography>
-                <Typography variant="subtitle2" color="text.secondary" mb={2}>
+
+                <Typography variant="subtitle2" color="text.secondary" mb={3}>
                   Free shipping nationwide
                 </Typography>
-                <Link to="/checkout">
-                  <Button variant="contained" color="primary" fullWidth>
-                    Buy Now
-                  </Button>
-                </Link>
+
+                {/* Quantity Selector */}
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  mb={2}
+                  gap={1}
+                >
+                  <IconButton
+                    size="small"
+                    onClick={() => handleQuantityChange(product.id, -1)}
+                  >
+                    <Remove />
+                  </IconButton>
+
+                  <TextField
+                    value={quantities[product.id]}
+                    size="small"
+                    inputProps={{
+                      style: { textAlign: "center" },
+                      readOnly: true,
+                    }}
+                    sx={{ width: 50 }}
+                  />
+
+                  <IconButton
+                    size="small"
+                    onClick={() => handleQuantityChange(product.id, 1)}
+                  >
+                    <Add />
+                  </IconButton>
+                </Box>
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  onClick={() => handleAddToCart(product)}
+                >
+                  Add to Cart
+                </Button>
               </CardContent>
             </Card>
           ))}
+
           <Typography
             variant="body2"
             color="grey.500"
-            mt={2}
+            mt={4}
             fontStyle="italic"
-            paddingBottom={10}
+            textAlign="center"
+            width="100%"
           >
             Join hundreds of happy Valentines who chose to make the moment
             special.
