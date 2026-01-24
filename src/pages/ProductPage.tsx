@@ -17,7 +17,7 @@ const products = [
     name: "Thoughtful",
     description:
       "A carefully crafted chocolate tier designed to delight and create a memorable experience.",
-    price: "₱499",
+    price: "₱549",
     image: "/tiers/p_thoughtful.png",
   },
   {
@@ -25,7 +25,7 @@ const products = [
     name: "Deluxe",
     description:
       "An elevated chocolate tier for a richer, more indulgent experience that feels truly special.",
-    price: "₱599",
+    price: "₱649",
     image: "/tiers/p_deluxe.jpg",
   },
 ];
@@ -95,6 +95,9 @@ export default function ProductPage() {
                 </Typography>
                 <Typography variant="subtitle1" fontWeight="medium" mb={2}>
                   {product.price}
+                </Typography>
+                <Typography variant="subtitle2" color="text.secondary" mb={2}>
+                  Free shipping nationwide
                 </Typography>
                 <Button
                   variant="contained"
