@@ -56,7 +56,7 @@ export default function ProductPage() {
       price: product.price,
       quantity: quantities[product.id],
     });
-    alert(`${quantities[product.id]} x ${product.name} added to cart!`);
+    // alert(`${quantities[product.id]} x ${product.name} added to cart!`);
   };
 
   return (
