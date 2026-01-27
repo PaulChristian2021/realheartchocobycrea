@@ -117,6 +117,23 @@ export default function CheckoutPage() {
     setErrors((prev) => ({ ...prev, [key]: "" }));
   };
 
+  const clearFields = () => {
+    setEmail("");
+    setPhone("");
+    setStreet("");
+    setCity("");
+    setProvince("");
+    setZip("");
+    setNote("");
+    sessionStorage.removeItem(EMAIL_KEY);
+    sessionStorage.removeItem(PHONE_KEY);
+    sessionStorage.removeItem(STREET_KEY);
+    sessionStorage.removeItem(CITY_KEY);
+    sessionStorage.removeItem(PROVINCE_KEY);
+    sessionStorage.removeItem(ZIP_KEY);
+    sessionStorage.removeItem(NOTE_KEY);
+  };
+
   const validateForm = () => {
     const errs: { [key: string]: string } = {};
     if (!emailRegex.test(email)) errs.email = "Invalid email";
@@ -157,9 +174,10 @@ Instructions:
 1. Download or copy the order details.
 2. Pay the total amount using available payment options (GCash / BPI).
 3. Send both the order details and your payment screenshot to:
-   - 09294413362 (SMS/Call)
+   - 09294413362 (SMS/Viber/WhatsApp)
    - @rhccrea on Instagram / TikTok
    - creatruction@gmail.com
+4. You will receive a reply for confirmation.
 `;
   };
 
@@ -206,10 +224,18 @@ Instructions:
         </Box>
 
         {/* CUSTOMER INFO */}
-        <Paper sx={{ bgcolor: "#1a1a1a", p: 4, mb: 4 }}>
+        <Paper sx={{ bgcolor: "#1a1a1a", p: 4, mb: 4, position: "relative" }}>
           <Typography fontWeight="bold" mb={2}>
             Customer Info
           </Typography>
+          <Button
+            size="small"
+            variant="outlined"
+            sx={{ position: "absolute", top: 16, right: 16 }}
+            onClick={clearFields}
+          >
+            CLEAR
+          </Button>
 
           <TextField
             label="Email"
@@ -372,9 +398,12 @@ Instructions:
               <Typography>
                 3. Send both the order details and your payment screenshot to:
               </Typography>
-              <Typography>- 09294413362 (SMS/Call)</Typography>
+              <Typography>- 09294413362 (SMS/Viber/WhatsApp)</Typography>
               <Typography>- @rhccrea on Instagram / TikTok</Typography>
               <Typography>- creatruction@gmail.com</Typography>
+              <Typography>
+                4. You will receive a reply for confirmation.
+              </Typography>
             </Box>
           </Box>
 
@@ -420,6 +449,19 @@ Instructions:
               </Typography>
             </Box>
           )}
+
+          {/* PSYCHOLOGICAL REINFORCEMENT */}
+          <Typography
+            variant="body2"
+            color="grey.500"
+            mt={4}
+            fontStyle="italic"
+            textAlign="center"
+            width="100%"
+          >
+            You're making a thoughtful choice—your order is carefully noted, and
+            her special moment will be delivered with care.
+          </Typography>
         </DialogContent>
       </Dialog>
     </Box>
