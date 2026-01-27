@@ -1,0 +1,7 @@
+/quote          /quote       200
+/tiers          /tiers       200
+/cart           /cart        200
+/checkout       /checkout    200
+/faq            /faq         200
+/               /quote       301
+/*              /home        200
