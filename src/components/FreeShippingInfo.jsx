@@ -76,7 +76,7 @@ export default function FreeShippingInfo() {
           variant="subtext"
           sx={{ display: "block", marginTop: "10px" }}
         >
-          We try to ship as early as possible!
+          We ship as early as possible!
         </Typography>
       </Popover>
     </>

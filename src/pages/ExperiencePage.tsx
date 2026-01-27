@@ -78,6 +78,25 @@ export default function ExperiencePage() {
   const next = () => setIndex((i) => (i + 1) % slides.length);
   const prev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
 
+  // 🔥 PRELOAD ALL IMAGES ON MOUNT
+  useEffect(() => {
+    slides.forEach((slide) => {
+      const img = new Image();
+      img.src = `/${slide.id}.jpg`;
+    });
+  }, []);
+
+  // 🔥 PRELOAD NEXT & PREVIOUS IMAGE ON CHANGE
+  useEffect(() => {
+    const nextIndex = (index + 1) % slides.length;
+    const prevIndex = (index - 1 + slides.length) % slides.length;
+
+    [nextIndex, prevIndex].forEach((i) => {
+      const img = new Image();
+      img.src = `/${slides[i].id}.jpg`;
+    });
+  }, [index]);
+
   // Autoplay
   useEffect(() => {
     if (paused) return;
@@ -125,6 +144,8 @@ export default function ExperiencePage() {
           alt={slides[index].title}
           className="slide-image"
           draggable={false}
+          loading="eager"
+          decoding="async"
         />
 
         <div className="caption">
@@ -165,7 +186,6 @@ export default function ExperiencePage() {
         ))}
       </div>
 
-      {/* CTA */}
       <div className="cta">
         <Link to="/tiers">Choose a Gift Tier</Link>
       </div>
@@ -190,6 +210,7 @@ export default function ExperiencePage() {
           width: 100%;
           height: 360px;
           object-fit: cover;
+          display: block;
         }
 
         .caption {

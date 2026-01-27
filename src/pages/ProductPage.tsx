@@ -11,9 +11,10 @@ import {
   IconButton,
   TextField,
 } from "@mui/material";
-import { useCart } from "../context/CartContext";
 import { Add, Remove } from "@mui/icons-material";
+import { useCart } from "../context/CartContext";
 import FreeShippingInfo from "../components/FreeShippingInfo";
+import { Link } from "react-router-dom";
 
 const tiers = [
   {
@@ -35,11 +36,16 @@ const tiers = [
 ];
 
 export default function ProductPage() {
-  const { addItem } = useCart();
+  const { addItem, items } = useCart();
+
+  const hasItems = items.length > 0;
 
   // Track quantity per product
   const [quantities, setQuantities] = useState(
-    tiers.reduce((acc, tier) => ({ ...acc, [tier.id]: 1 }), {})
+    tiers.reduce(
+      (acc, tier) => ({ ...acc, [tier.id]: 1 }),
+      {} as Record<string, number>,
+    ),
   );
 
   const handleQuantityChange = (id: string, delta: number) => {
@@ -56,7 +62,6 @@ export default function ProductPage() {
       price: product.price,
       quantity: quantities[product.id],
     });
-    // alert(`${quantities[product.id]} x ${product.name} added to cart!`);
   };
 
   return (
@@ -67,7 +72,7 @@ export default function ProductPage() {
         bgcolor: "background.default",
         color: "text.primary",
         py: 8,
-        pb: 10,
+        pb: 12, // extra space so button doesn’t cover content
       }}
     >
       <Container maxWidth="lg">
@@ -185,6 +190,37 @@ export default function ProductPage() {
           </Typography>
         </Box>
       </Container>
+
+      {/* Sticky Go To Cart Button */}
+      {hasItems && (
+        <Box
+          sx={{
+            position: "fixed",
+            bottom: 16,
+            left: 0,
+            right: 0,
+            display: "flex",
+            justifyContent: "center",
+            zIndex: 1200,
+          }}
+        >
+          <Link to="/cart">
+            <Button
+              variant="contained"
+              color="secondary"
+              size="large"
+              sx={{
+                px: 6,
+                py: 1.5,
+                borderRadius: 999,
+                boxShadow: 6,
+              }}
+            >
+              Go to Cart
+            </Button>
+          </Link>
+        </Box>
+      )}
     </Box>
   );
 }
