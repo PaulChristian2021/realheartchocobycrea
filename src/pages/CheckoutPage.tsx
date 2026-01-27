@@ -135,18 +135,6 @@ export default function CheckoutPage() {
     setOrderRef(ref);
     setModalOpen(true);
     setSelectedQR(null);
-    console.log("Order Payload", {
-      email,
-      phone,
-      street,
-      city,
-      province,
-      zip,
-      note,
-      items,
-      total,
-      ref,
-    });
   };
 
   const buildOrderText = () => {
@@ -154,7 +142,7 @@ export default function CheckoutPage() {
       .map((i) => `- ${i.name} x${i.quantity} = ₱${i.price * i.quantity}`)
       .join("\n");
     return `
-Order Ref: ${orderRef}
+Order Reference: ${orderRef}
 Email: ${email}
 Phone: ${phone}
 Address: ${street}, ${city}, ${province}, ${zip}
@@ -165,9 +153,13 @@ ${itemLines}
 
 Total: ₱${total}
 
-Payment Options: GCash / BPI
-
-⚠️ Please screenshot your payment and keep this reference.
+Instructions:
+1. Download or copy the order details.
+2. Pay the total amount using available payment options (GCash / BPI).
+3. Send both the order details and your payment screenshot to:
+   - 09294413362 (SMS/Call)
+   - @rhccrea on Instagram / TikTok
+   - creatruction@gmail.com
 `;
   };
 
@@ -330,7 +322,7 @@ Payment Options: GCash / BPI
           size="large"
           sx={{ py: 1.6, fontSize: "1rem", borderRadius: 2, mb: 3 }}
           onClick={handlePlaceOrder}
-          disabled={items.length === 0}
+          disabled={!isFormValid}
         >
           Place Order
         </Button>
@@ -339,7 +331,7 @@ Payment Options: GCash / BPI
       {/* PAYMENT MODAL */}
       <Dialog open={modalOpen} fullWidth maxWidth="sm">
         <DialogTitle>
-          Order Ref: {orderRef}
+          Order Reference: {orderRef}
           <IconButton
             onClick={() => setModalOpen(false)}
             sx={{ position: "absolute", right: 8, top: 8 }}
@@ -347,17 +339,46 @@ Payment Options: GCash / BPI
             <Close />
           </IconButton>
         </DialogTitle>
-        <DialogContent ref={orderRefRef}>
-          <Typography mb={1}>
-            Total Amount: <b>₱{total}</b>
-          </Typography>
+        <DialogContent>
+          <Box
+            ref={orderRefRef}
+            sx={{ p: 2, bgcolor: "#1a1a1a", color: "#fff" }}
+          >
+            <Typography variant="h6" mb={1}>
+              Order Details
+            </Typography>
+            <Typography>Email: {email}</Typography>
+            <Typography>Phone: {phone}</Typography>
+            <Typography>
+              Address: {street}, {city}, {province}, {zip}
+            </Typography>
+            <Typography>Notes: {note || "N/A"}</Typography>
+            <Divider sx={{ my: 1, borderColor: "rgba(255,255,255,0.3)" }} />
+            <Typography variant="subtitle1">Items:</Typography>
+            {items.map((i) => (
+              <Typography key={i.id}>
+                - {i.name} × {i.quantity} = ₱{i.price * i.quantity}
+              </Typography>
+            ))}
+            <Divider sx={{ my: 1, borderColor: "rgba(255,255,255,0.3)" }} />
+            <Typography fontWeight="bold">Total: ₱{total}</Typography>
+            <Box mt={2}>
+              <Typography fontWeight="bold">Instructions:</Typography>
+              <Typography>1. Download or copy the order details.</Typography>
+              <Typography>
+                2. Pay the total amount using available payment options (GCash /
+                BPI).
+              </Typography>
+              <Typography>
+                3. Send both the order details and your payment screenshot to:
+              </Typography>
+              <Typography>- 09294413362 (SMS/Call)</Typography>
+              <Typography>- @rhccrea on Instagram / TikTok</Typography>
+              <Typography>- creatruction@gmail.com</Typography>
+            </Box>
+          </Box>
 
-          <Typography variant="body2" sx={{ opacity: 0.8, mb: 2 }}>
-            ⚠️ Please screenshot your payment. Then either download your order
-            image or copy text for reference.
-          </Typography>
-
-          <Stack direction="row" spacing={2} mb={2}>
+          <Stack direction="row" spacing={2} my={2}>
             <Button
               startIcon={<Download />}
               onClick={downloadOrderImage}
@@ -374,12 +395,14 @@ Payment Options: GCash / BPI
             <Button
               variant={selectedQR === "gcash" ? "contained" : "outlined"}
               onClick={() => setSelectedQR("gcash")}
+              fullWidth
             >
               GCash
             </Button>
             <Button
               variant={selectedQR === "bpi" ? "contained" : "outlined"}
               onClick={() => setSelectedQR("bpi")}
+              fullWidth
             >
               BPI
             </Button>
