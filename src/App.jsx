@@ -21,16 +21,13 @@ export default function App() {
           <Header />
           <Routes>
             {/* Homepage (landing for ads) */}
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home />} />
 
             {/* QR quote page - will remain light/pink */}
             <Route path="/quote" element={<DailyQuotes />} />
 
-            {/* Redirect / to /quote */}
-            <Route path="/" element={<Home />} />
-
             {/* fallback for unknown paths */}
-            <Route path="*" element={<Navigate to="/home" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
 
             <Route path="/tiers" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />

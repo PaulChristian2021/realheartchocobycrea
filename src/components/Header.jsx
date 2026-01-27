@@ -39,8 +39,8 @@ export default function Header() {
             ? "rgba(255, 245, 230, 0.95)" // opaque when scrolling
             : "radial-gradient(circle at top, #fffdfb 0%, #f6efea 45%, #efe5df 100%)"
           : scrolled
-          ? "rgba(14, 14, 14, 0.95)" // solid dark when scrolling
-          : "transparent", // transparent at top
+            ? "rgba(14, 14, 14, 0.95)" // solid dark when scrolling
+            : "transparent", // transparent at top
         color: isQuotes ? "#000" : "#fff",
         transition: "background 0.3s ease, box-shadow 0.3s ease",
         px: { xs: 2, sm: 4 },
@@ -135,7 +135,7 @@ export default function Header() {
           >
             <Button
               component={Link}
-              to="/home"
+              to="/"
               color="inherit"
               sx={{ "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" } }}
             >
