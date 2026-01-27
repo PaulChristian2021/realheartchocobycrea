@@ -151,11 +151,11 @@ export default function Header() {
             </Button>
             <Button
               component={Link}
-              to="/faq"
+              to="/experience"
               color="inherit"
               sx={{ "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" } }}
             >
-              FAQ
+              The experience
             </Button>
 
             {/* Cart Icon with Badge */}

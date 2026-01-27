@@ -10,6 +10,7 @@ import DailyQuotes from "./pages/DailyQuotes";
 import ProductPage from "./pages/ProductPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import CartPage from "./pages/CartPage";
+import ExperiencePage from "./pages/ExperiencePage";
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
 
             <Route path="/tiers" element={<ProductPage />} />
+            <Route path="/experience" element={<ExperiencePage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
           </Routes>
