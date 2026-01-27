@@ -72,6 +72,12 @@ export default function FreeShippingInfo() {
         <Typography>• Manila: 1–2 days</Typography>
         <Typography>• Nearby provinces: 2–4 days</Typography>
         <Typography>• Nationwide: 4–7 days</Typography>
+        <Typography
+          variant="subtext"
+          sx={{ display: "block", marginTop: "10px" }}
+        >
+          We try to ship as early as possible!
+        </Typography>
       </Popover>
     </>
   );
