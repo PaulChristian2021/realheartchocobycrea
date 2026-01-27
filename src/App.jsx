@@ -27,7 +27,7 @@ export default function App() {
             <Route path="/quote" element={<DailyQuotes />} />
 
             {/* Redirect / to /quote */}
-            <Route path="/" element={<Navigate to="/home" replace />} />
+            <Route path="/" element={<Home />} />
 
             {/* fallback for unknown paths */}
             <Route path="*" element={<Navigate to="/home" replace />} />
