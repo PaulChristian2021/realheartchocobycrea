@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 
 import { CartProvider } from "./context/CartContext";
@@ -18,7 +18,7 @@ export default function App() {
       {/* CssBaseline applies theme globally */}
       <CssBaseline />
       <CartProvider>
-        <BrowserRouter>
+        <HashRouter>
           <Header />
           <Routes>
             {/* Homepage (landing for ads) */}
@@ -35,7 +35,7 @@ export default function App() {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </CartProvider>
     </ThemeProvider>
   );
