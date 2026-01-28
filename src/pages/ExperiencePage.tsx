@@ -24,49 +24,49 @@ const slides: Slide[] = [
     id: 3,
     title: "Inside the Box",
     caption:
-      "Inside: the chocolate, thoughtful envelopes, elegant fillers, and small details meant to be discovered — not rushed.",
+      "Inside:\nthe chocolate, thoughtful envelopes, elegant fillers,\nand small details meant to be discovered — not rushed.",
   },
   {
     id: 4,
     title: "The Brown Envelope",
     caption:
-      "You notice a brown envelope set aside for you.\nIt explains why this gift exists — and why this moment matters.",
+      "You notice a brown envelope set aside for you.\nKeep it.\n\nIt explains why this gift exists — and why this moment matters.\nA quiet reminder, before anything else begins.",
   },
   {
     id: 5,
-    title: "First Black Envelope",
+    title: "The First Black Envelope (Top)",
     caption:
-      "A card with your name and the Valentine year.\nA QR code leads to a romantic quote — changing daily.",
+      "The first black envelope carries a card with your name and the Valentine year.\nShe’ll find a QR code that leads to a romantic quote — changing daily.\n\nA small way to make this feel ongoing, not one-time.",
   },
   {
     id: 6,
-    title: "Second Black Envelope",
+    title: "The Second Black Envelope (Middle)",
     caption:
-      "“Someone’s thinking of me.”\nOn the back: “I’m thinking of someone.”",
+      "The next card reflects the moment itself.\n\n“Someone’s thinking of me.”\n\nOn the back:\n“I’m thinking of someone.”\n\nYou can capture these symbols.\nMaybe it stays private.\nMaybe it becomes something you share.",
   },
   {
     id: 7,
-    title: "Third Black Envelope",
+    title: "The Third Black Envelope (Bottom)",
     caption:
-      "Two blank cards — waiting for your words.\nBecause some things should only come from you.",
+      "The last envelope is the most personal.\nTwo blank cards — waiting for your words.\n\nBecause some things should only come from you.",
   },
   {
     id: 8,
     title: "The Chocolate",
     caption:
-      "A heart-shaped chocolate — crafted to be enjoyed easily, but remembered longer than it lasts.",
+      "Beneath it all is the heart-shaped chocolate —\ncrafted to be enjoyed easily,\nbut remembered longer than it lasts.",
   },
   {
     id: 9,
-    title: "Hidden Message",
+    title: "The Hidden Message",
     caption:
-      "Once the chocolate is gone, there’s one final detail:\n“Don’t forget to drink water.”",
+      "Once the chocolate is gone, there’s one final detail.\nA hidden message at the bottom of the box:\n\n“Don’t forget to drink water.”\n\nSmall. Thoughtful. Unexpected.",
   },
   {
     id: 10,
     title: "Closing",
     caption:
-      "More than a gift. More than chocolate.\nA shared experience — for her, for you, for the heart.",
+      "More than a gift.\nMore than chocolate.\n\nA shared experience —\nfor her, for you, for the heart.",
   },
 ];
 
@@ -78,7 +78,7 @@ export default function ExperiencePage() {
   const next = () => setIndex((i) => (i + 1) % slides.length);
   const prev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
 
-  // 🔥 PRELOAD ALL IMAGES ON MOUNT
+  // Preload all images on mount
   useEffect(() => {
     slides.forEach((slide) => {
       const img = new Image();
@@ -86,7 +86,7 @@ export default function ExperiencePage() {
     });
   }, []);
 
-  // 🔥 PRELOAD NEXT & PREVIOUS IMAGE ON CHANGE
+  // Preload next & previous image on change
   useEffect(() => {
     const nextIndex = (index + 1) % slides.length;
     const prevIndex = (index - 1 + slides.length) % slides.length;
