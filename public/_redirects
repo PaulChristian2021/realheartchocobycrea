@@ -4,4 +4,4 @@
 /checkout       /checkout    200
 /faq            /faq         200
 /               /quote       301
-/*              /home        200
+/*              /index.html        200
