@@ -14,7 +14,7 @@ import { useCart } from "../context/CartContext";
 
 export default function Header() {
   const location = useLocation();
-  const isQuotes = location.pathname === "/quote";
+  const isQuotes = location.pathname === "/";
 
   const { items } = useCart();
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
@@ -39,8 +39,8 @@ export default function Header() {
             ? "rgba(255, 245, 230, 0.95)" // opaque when scrolling
             : "radial-gradient(circle at top, #fffdfb 0%, #f6efea 45%, #efe5df 100%)"
           : scrolled
-          ? "rgba(14, 14, 14, 0.95)" // solid dark when scrolling
-          : "transparent", // transparent at top
+            ? "rgba(14, 14, 14, 0.95)" // solid dark when scrolling
+            : "transparent", // transparent at top
         color: isQuotes ? "#000" : "#fff",
         transition: "background 0.3s ease, box-shadow 0.3s ease",
         px: { xs: 2, sm: 4 },
