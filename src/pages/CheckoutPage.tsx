@@ -436,7 +436,7 @@ Instructions:
               onClick={downloadOrderImage}
               fullWidth
             >
-              Download Order Image
+              Download Order Details PNG
             </Button>
             <Button startIcon={<ContentCopy />} onClick={copyOrder} fullWidth>
               Copy Order Details
