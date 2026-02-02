@@ -39,6 +39,7 @@ const CITY_KEY = "checkout_city";
 const PROVINCE_KEY = "checkout_province";
 const ZIP_KEY = "checkout_zip";
 const NOTE_KEY = "checkout_note";
+const AFFILIATE_KEY = "checkout_affiliate"; // ✅ ADDED
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const isValidPHPhone = (value: string) => {
@@ -72,6 +73,10 @@ export default function CheckoutPage() {
   const [note, setNote] = useState(
     () => sessionStorage.getItem(NOTE_KEY) || "",
   );
+
+  const [affiliateCode, setAffiliateCode] = useState(
+    () => sessionStorage.getItem(AFFILIATE_KEY) || "",
+  ); // ✅ ADDED
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [modalOpen, setModalOpen] = useState(false);
@@ -113,6 +118,10 @@ export default function CheckoutPage() {
         setNote(value);
         sessionStorage.setItem(NOTE_KEY, value);
         break;
+      case "affiliate":
+        setAffiliateCode(value?.toLocaleUpperCase());
+        sessionStorage.setItem(AFFILIATE_KEY, value?.toLocaleUpperCase());
+        break;
     }
     setErrors((prev) => ({ ...prev, [key]: "" }));
   };
@@ -125,6 +134,7 @@ export default function CheckoutPage() {
     setProvince("");
     setZip("");
     setNote("");
+    setAffiliateCode(""); // ✅ ADDED
     sessionStorage.removeItem(EMAIL_KEY);
     sessionStorage.removeItem(PHONE_KEY);
     sessionStorage.removeItem(STREET_KEY);
@@ -132,6 +142,7 @@ export default function CheckoutPage() {
     sessionStorage.removeItem(PROVINCE_KEY);
     sessionStorage.removeItem(ZIP_KEY);
     sessionStorage.removeItem(NOTE_KEY);
+    sessionStorage.removeItem(AFFILIATE_KEY); // ✅ ADDED
   };
 
   const validateForm = () => {
@@ -163,6 +174,7 @@ Order Reference: ${orderRef}
 Email: ${email}
 Phone: ${phone}
 Address: ${street}, ${city}, ${province}, ${zip}
+Affiliate Code: ${affiliateCode || "N/A"}   // ✅ Affiliate
 Notes: ${note || "N/A"}
 
 Items:
@@ -228,6 +240,16 @@ Instructions:
           <Typography fontWeight="bold" mb={2}>
             Customer Info
           </Typography>
+
+          <TextField
+            label="Affiliate Code (optional)"
+            fullWidth
+            variant="filled"
+            sx={{ mb: 2 }}
+            value={affiliateCode}
+            onChange={(e) => handleChange("affiliate", e.target.value)}
+            helperText="Enter code if someone referred you"
+          />
           <Button
             size="small"
             variant="outlined"
@@ -373,6 +395,7 @@ Instructions:
             <Typography variant="h6" mb={1}>
               Order Details
             </Typography>
+            <Typography>Affiliate Code: {affiliateCode}</Typography>
             <Typography>Email: {email}</Typography>
             <Typography>Phone: {phone}</Typography>
             <Typography>
